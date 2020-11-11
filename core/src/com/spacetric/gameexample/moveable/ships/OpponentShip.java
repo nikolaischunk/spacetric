@@ -10,11 +10,9 @@ public class OpponentShip extends SpaceElement {
     }
 
     @Override
-    public void moveDown(Batch batch) {
-        super.moveDown(batch);
-        if (y < 1) {
-            System.out.println("LOST");
-        }
+    public void move(Batch batch) {
+        y -= speed;
+        super.move(batch);
     }
 
 }

@@ -26,14 +26,8 @@ public class Game extends ApplicationAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        meteor.moveDown(batch);
-        opponentShip.moveDown(batch);
-        try {
-            meteor.moveDown(batch);
-
-        } catch (Exception e) {
-            System.out.println("YOU LOST");
-        }
+        meteor.move(batch);
+        opponentShip.move(batch);
         batch.end();
     }
 

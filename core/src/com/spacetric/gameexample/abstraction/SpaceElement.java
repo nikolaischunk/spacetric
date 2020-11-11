@@ -20,7 +20,7 @@ public abstract class SpaceElement {
         this.y = y;
     }
 
-    protected void moveDown(Batch batch) {
+    protected void move(Batch batch) {
         render(batch);
     }
 
