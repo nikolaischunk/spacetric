@@ -6,17 +6,19 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.spacetric.gameexample.moveable.objects.SpaceObject;
+import com.spacetric.gameexample.moveable.ships.OpponentShip;
 
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     Texture img;
     SpaceObject meteor;
+    OpponentShip opponentShip;
 
     @Override
     public void create() {
         batch = new SpriteBatch();
         meteor = new SpaceObject("Astroids/Astroid1_1.png", 2, 200, 200, 20, Gdx.graphics.getHeight());
-
+        opponentShip = new OpponentShip("Ships/opShip1.png", 6, 200, 200, 40, Gdx.graphics.getHeight());
     }
 
     @Override
@@ -25,6 +27,13 @@ public class Game extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
         meteor.moveDown(batch);
+        opponentShip.moveDown(batch);
+        try {
+            meteor.moveDown(batch);
+
+        } catch (Exception e) {
+            System.out.println("YOU LOST");
+        }
         batch.end();
     }
 
