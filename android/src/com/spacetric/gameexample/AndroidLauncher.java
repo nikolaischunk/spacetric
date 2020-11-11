@@ -1,4 +1,4 @@
-package com.schunk.gameexample;
+package com.spacetric.gameexample;
 
 import android.os.Bundle;
 
