@@ -3,7 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="GdxExampleGame.android" target="1.8" />
-      <module name="Spacetric.android" target="1.8" />
+      <module name="spacetric.android" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
