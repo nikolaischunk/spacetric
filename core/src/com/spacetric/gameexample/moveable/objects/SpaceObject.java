@@ -11,6 +11,8 @@ public class SpaceObject extends SpaceElement {
 
     @Override
     public void moveDown(Batch batch) {
+
+        y -= speed;
         super.moveDown(batch);
         if (y < 0) {
             System.out.println("LOST");

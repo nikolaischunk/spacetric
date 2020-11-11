@@ -21,11 +21,10 @@ public abstract class SpaceElement {
     }
 
     protected void moveDown(Batch batch) {
-        y -= speed;
         render(batch);
     }
 
-    public void render(Batch batch) {
+    private void render(Batch batch) {
         batch.draw(image, x, y);
     }
 
