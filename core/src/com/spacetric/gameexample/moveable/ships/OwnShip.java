@@ -7,22 +7,23 @@ import com.spacetric.gameexample.moveable.objects.Laser;
 
 public class OwnShip extends SpaceElement {
 
-    private Laser leftLaser;
-    private Laser rightLaser;
+    private Laser laser;
+
     private static final int width = 150;
     private static final int height = 150;
 
+
     public OwnShip(String pathToFile, int speed, int x, int y, String pathToLaserImg) {
         super(speed, pathToFile, width, height, x, y);
-        leftLaser = new Laser(pathToLaserImg, x,y);
-        rightLaser = new Laser(pathToLaserImg, x + width % 10, y);
+        laser = new Laser(pathToLaserImg, x,y);
+
     }
 
     @Override
     public void move(Batch batch) {
         super.move(batch);
-        leftLaser.move(batch);
-        rightLaser.move(batch);
+        laser.move(batch);
+
     }
 
     public void shoot(Texture laser, Batch batch) {
@@ -36,5 +37,9 @@ public class OwnShip extends SpaceElement {
 
     public static int getHeight() {
         return height;
+    }
+
+    public Laser getLeftLaser() {
+        return laser;
     }
 }
