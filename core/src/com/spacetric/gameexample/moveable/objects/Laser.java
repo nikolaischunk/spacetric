@@ -36,7 +36,6 @@ public class Laser {
 
     public void move(Batch batch) {
         batch.draw(laser, x, ++y);
-        Gdx.app.log("LASER_LOG", x + " " + y);
     }
 
 
