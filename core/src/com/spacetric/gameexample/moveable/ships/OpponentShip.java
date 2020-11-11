@@ -1,5 +1,6 @@
 package com.spacetric.gameexample.moveable.ships;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.spacetric.gameexample.abstraction.SpaceElement;
 
