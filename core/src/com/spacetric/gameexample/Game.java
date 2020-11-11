@@ -13,8 +13,6 @@ import com.spacetric.gameexample.moveable.ships.OwnShip;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.soap.Text;
-
 public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     Texture img;
@@ -22,7 +20,7 @@ public class Game extends ApplicationAdapter {
     OpponentShip opponentShip;
     OwnShip myShip;
     Texture imgLaserOwnShip;
-    private List<Laser> lasers = new ArrayList<>();
+    private final List<Laser> lasers = new ArrayList<>();
 
 
     @Override
