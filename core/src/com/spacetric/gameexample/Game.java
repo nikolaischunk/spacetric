@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.spacetric.gameexample.moveable.backround.Background;
 import com.spacetric.gameexample.moveable.objects.Laser;
 import com.spacetric.gameexample.moveable.objects.SpaceObject;
 import com.spacetric.gameexample.moveable.ships.OpponentShip;
@@ -15,14 +16,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.xml.soap.Text;
+
 public class Game extends ApplicationAdapter {
+    private final List<Laser> lasers = new ArrayList<>();
     SpriteBatch batch;
     Texture img;
     List<SpaceObject> asteroids;
     OpponentShip opponentShip;
     OwnShip myShip;
-    private final List<Laser> lasers = new ArrayList<>();
-
+    Background bg;
 
     @Override
     public void create() {
@@ -30,23 +33,17 @@ public class Game extends ApplicationAdapter {
         initializeAsteroids();
         opponentShip = new OpponentShip("Ships/opShip1.png", 6, 200, 200, 40, Gdx.graphics.getHeight());
         myShip = new OwnShip("Ships/playerShip.png", 0, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 8, "Shots/Shot1/shot1_4.png");
+        bg = new Background(new Texture("Sky/SkyLong.png"));
     }
 
     @Override
     public void render() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        moveToTouchPosition();
 
-        if (Gdx.input.isTouched()) {
-            float sizeWidth = myShip.getWidth() / 2; //Calculates the Middle of the Ship
-            int sizeWidthInt = (int) sizeWidth; // Cast to Int
-            myShip.setX(Gdx.input.getX() - sizeWidthInt);
-            Optional<Laser> laserOptional = myShip.shoot();
-            if (laserOptional.isPresent()) {
-                lasers.add(laserOptional.get());
-            }
-        }
         batch.begin();
+        bg.render(batch);
         for (Laser l : lasers) {
             l.move(batch);
         }
@@ -72,5 +69,17 @@ public class Game extends ApplicationAdapter {
                 new SpaceObject("Astroids/Astroid1_4.png"),
                 new SpaceObject("Astroids/Astroid1_5.png")
         );
+    }
+
+    private void moveToTouchPosition() {
+        if (Gdx.input.isTouched()) {
+            float sizeWidth = myShip.getWidth() / 2; //Calculates the Middle of the Ship
+            int sizeWidthInt = (int) sizeWidth; // Cast to Int
+            myShip.setX(Gdx.input.getX() - sizeWidthInt);
+            Optional<Laser> laserOptional = myShip.shoot();
+            if (laserOptional.isPresent()) {
+                lasers.add(laserOptional.get());
+            }
+        }
     }
 }
