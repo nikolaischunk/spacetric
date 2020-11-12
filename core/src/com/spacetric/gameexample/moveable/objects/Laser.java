@@ -9,7 +9,7 @@ import com.spacetric.gameexample.abstraction.SpaceElement;
 public class Laser extends SpaceElement {
 
     public Laser(String pathToLaser, int x, int y) {
-        super(5, pathToLaser, 150, 175, x, y);
+        super(5, pathToLaser, 150, 75, x, y);
     }
 
     public Laser(Texture laserTexture, float x, float y) {
