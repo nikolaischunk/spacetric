@@ -2,7 +2,6 @@ package com.spacetric.gameexample;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.spacetric.gameexample.moveable.backround.Background;
@@ -15,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-
-import javax.xml.soap.Text;
 
 public class Game extends ApplicationAdapter {
     private final List<Laser> lasers = new ArrayList<>();
@@ -33,13 +30,12 @@ public class Game extends ApplicationAdapter {
         initializeAsteroids();
         opponentShip = new OpponentShip("Ships/opShip1.png", 6, 200, 200, 40, Gdx.graphics.getHeight());
         myShip = new OwnShip("Ships/playerShip.png", 0, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 8, "Shots/Shot1/shot1_4.png");
-        bg = new Background(new Texture("Sky/SkyShort.png"));
+        bg = new Background(new Texture("Sky/SkyLong.png"), new Texture("Sky/SkyShort.png"));
     }
 
     @Override
     public void render() {
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         moveToTouchPosition();
 
         batch.begin();
