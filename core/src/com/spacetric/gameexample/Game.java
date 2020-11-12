@@ -20,6 +20,7 @@ public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     Texture img;
     List<SpaceObject> asteroids;
+    List<OpponentShip> enemies;
     OpponentShip opponentShip;
     OwnShip myShip;
     Background bg;
@@ -28,9 +29,20 @@ public class Game extends ApplicationAdapter {
     public void create() {
         batch = new SpriteBatch();
         initializeAsteroids();
+        initializeEnemies();
         opponentShip = new OpponentShip("Ships/opShip1.png", 6, 200, 200, 40, Gdx.graphics.getHeight());
         myShip = new OwnShip("Ships/playerShip.png", 0, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 8, "Shots/Shot1/shot1_4.png");
         bg = new Background(new Texture("Sky/SkyLong.png"), new Texture("Sky/SkyShort.png"));
+    }
+
+    private void initializeEnemies() {
+        enemies = Arrays.asList(
+                new OpponentShip("Ships/opShip1.png"),
+                new OpponentShip("Ships/opShip1.png"),
+                new OpponentShip("Ships/opShip1.png"),
+                new OpponentShip("Ships/opShip1.png"),
+                new OpponentShip("Ships/opShip1.png")
+        );
     }
 
     @Override
@@ -46,6 +58,9 @@ public class Game extends ApplicationAdapter {
         for (SpaceObject asteroid : asteroids) {
             asteroid.move(batch);
         }
+        for(OpponentShip ops : enemies) {
+            ops.move(batch);
+        }
         myShip.move(batch);
         opponentShip.move(batch);
         batch.end();
@@ -56,6 +71,7 @@ public class Game extends ApplicationAdapter {
         batch.dispose();
         img.dispose();
     }
+
 
     private void initializeAsteroids() {
         asteroids = Arrays.asList(

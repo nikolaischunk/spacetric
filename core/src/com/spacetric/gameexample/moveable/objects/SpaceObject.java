@@ -9,7 +9,7 @@ import java.util.Random;
 public class SpaceObject extends SpaceElement {
 
     private static final int minWidth = 70;
-    private static final int maxWidth = 250;
+    private static final int maxWidth = 200;
     private static final int minSpeed = 3;
     private static final int maxSpeed = 10;
     private static final Random intRand = new Random();
