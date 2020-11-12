@@ -4,21 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.spacetric.gameexample.abstraction.SpaceElement;
 
-public class Laser {
-
-    private Texture laserTexture;
-    private int x;
-    private int y;
+public class Laser extends SpaceElement {
 
     public Laser(String pathToLaser, int x, int y) {
-        this.laserTexture = createImage(pathToLaser, 300, 300);
-        this.x = x;
-        this.y = y;
+        super(5, pathToLaser, 150, 175, x, y);
     }
 
-    public Laser (Texture laserTexture, int x, int y) {
-        this.laserTexture = laserTexture;
+    public Laser(Texture laserTexture, float x, float y) {
+        super();
+        this.image = laserTexture;
+        speed = 5;
         this.x = x;
         this.y = y;
     }
@@ -41,28 +38,21 @@ public class Laser {
     }
 
     public void move(Batch batch) {
-        batch.draw(laserTexture, x, ++y);
+        y += speed;
+        batch.draw(image, x, y);
     }
 
 
     public Texture getLaserTexture() {
-        return laserTexture;
+        return image;
     }
 
     public void setLaser(Texture laser) {
-        this.laserTexture = laser;
-    }
-
-    public int getX() {
-        return x;
+        this.image = laser;
     }
 
     public void setX(int x) {
         this.x = x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public void setY(int y) {

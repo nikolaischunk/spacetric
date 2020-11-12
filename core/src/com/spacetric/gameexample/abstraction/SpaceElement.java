@@ -4,14 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.math.Rectangle;
 
 
-public abstract class SpaceElement {
+public abstract class SpaceElement extends Rectangle {
 
     protected int speed;
     protected Texture image;
-    protected int x;
-    protected int y;
 
     protected SpaceElement(int speed, String pathToFile, int width, int height, int x, int y) {
         this.speed = speed;
@@ -19,6 +18,16 @@ public abstract class SpaceElement {
         this.x = x;
         this.y = y;
     }
+
+    protected SpaceElement(int speed, String pathToFile, int widthAndHeight, int x, int y) {
+        this.speed = speed;
+        this.image = createImage(pathToFile, widthAndHeight, widthAndHeight);
+        this.x = x;
+        this.y = y;
+    }
+
+    protected SpaceElement() {}
+
 
     protected void move(Batch batch) {
         render(batch);
@@ -45,16 +54,8 @@ public abstract class SpaceElement {
         return img;
     }
 
-    public int getX() {
-        return x;
-    }
-
     public void setX(int x) {
         this.x = x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public void setY(int y) {
