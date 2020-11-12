@@ -7,12 +7,18 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Laser {
 
-    private Texture laser;
+    private Texture laserTexture;
     private int x;
     private int y;
 
     public Laser(String pathToLaser, int x, int y) {
-        this.laser = createImage(pathToLaser, 300, 300);
+        this.laserTexture = createImage(pathToLaser, 300, 300);
+        this.x = x;
+        this.y = y;
+    }
+
+    public Laser (Texture laserTexture, int x, int y) {
+        this.laserTexture = laserTexture;
         this.x = x;
         this.y = y;
     }
@@ -35,16 +41,16 @@ public class Laser {
     }
 
     public void move(Batch batch) {
-        batch.draw(laser, x, ++y);
+        batch.draw(laserTexture, x, ++y);
     }
 
 
-    public Texture getLaser() {
-        return laser;
+    public Texture getLaserTexture() {
+        return laserTexture;
     }
 
     public void setLaser(Texture laser) {
-        this.laser = laser;
+        this.laserTexture = laser;
     }
 
     public int getX() {

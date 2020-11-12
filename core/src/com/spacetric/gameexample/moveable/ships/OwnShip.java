@@ -26,9 +26,8 @@ public class OwnShip extends SpaceElement {
 
     }
 
-    public void shoot(Texture laser, Batch batch) {
-        batch.draw(laser, x, y);
-
+    public Laser shoot() {
+        return new Laser(laser.getLaserTexture(), x, y);
     }
 
     public static int getWidth() {
@@ -39,7 +38,7 @@ public class OwnShip extends SpaceElement {
         return height;
     }
 
-    public Laser getLeftLaser() {
+    public Laser getLaser() {
         return laser;
     }
 }
