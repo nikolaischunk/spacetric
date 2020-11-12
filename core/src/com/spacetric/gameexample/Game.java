@@ -21,6 +21,7 @@ public class Game extends ApplicationAdapter {
     OpponentShip opponentShip;
     OwnShip myShip;
     Texture imgLaserOwnShip;
+
     private final List<Laser> lasers = new ArrayList<>();
 
 
@@ -40,11 +41,9 @@ public class Game extends ApplicationAdapter {
 
         if (Gdx.input.isTouched()) {
             float sizeWidth = OwnShip.getWidth() / 2; //Calculates the Middle of the Ship
-            //float sizeHeight = OwnShip.getHeight() / 2;
             int sizeWidthInt = (int) sizeWidth; // Cast to Int
-            //int sizeHeightInt = (int) sizeHeight;
-            myShip.setX(Gdx.graphics.getWidth() - Gdx.input.getX() - sizeWidthInt);
-            //
+
+            myShip.setX(Gdx.input.getX() - sizeWidthInt);
 
             lasers.add(myShip.shoot());
         }
