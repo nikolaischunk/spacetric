@@ -19,11 +19,6 @@ public class Game extends ApplicationAdapter {
     SpriteBatch batch;
     Texture img;
     List<SpaceObject> asteroids;
-    SpaceObject meteor1;
-    SpaceObject meteor2;
-    SpaceObject meteor3;
-    SpaceObject meteor4;
-    SpaceObject meteor5;
     OpponentShip opponentShip;
     OwnShip myShip;
     private final List<Laser> lasers = new ArrayList<>();
@@ -47,15 +42,15 @@ public class Game extends ApplicationAdapter {
             int sizeWidthInt = (int) sizeWidth; // Cast to Int
             myShip.setX(Gdx.input.getX() - sizeWidthInt);
             Optional<Laser> laserOptional = myShip.shoot();
-            if(laserOptional.isPresent()) {
+            if (laserOptional.isPresent()) {
                 lasers.add(laserOptional.get());
             }
         }
         batch.begin();
-        for(Laser l : lasers) {
+        for (Laser l : lasers) {
             l.move(batch);
         }
-        for(SpaceObject asteroid : asteroids) {
+        for (SpaceObject asteroid : asteroids) {
             asteroid.move(batch);
         }
         myShip.move(batch);
@@ -70,11 +65,12 @@ public class Game extends ApplicationAdapter {
     }
 
     private void initializeAsteroids() {
-        meteor1 = new SpaceObject("Astroids/Astroid1_1.png");
-        meteor2 = new SpaceObject("Astroids/Astroid1_2.png");
-        meteor3 = new SpaceObject("Astroids/Astroid1_3.png");
-        meteor4 = new SpaceObject("Astroids/Astroid1_4.png");
-        meteor5 = new SpaceObject("Astroids/Astroid1_5.png");
-        asteroids = Arrays.asList(meteor1, meteor2, meteor3, meteor4, meteor5);
+        asteroids = Arrays.asList(
+                new SpaceObject("Astroids/Astroid1_1.png"),
+                new SpaceObject("Astroids/Astroid1_2.png"),
+                new SpaceObject("Astroids/Astroid1_3.png"),
+                new SpaceObject("Astroids/Astroid1_4.png"),
+                new SpaceObject("Astroids/Astroid1_5.png")
+        );
     }
 }
