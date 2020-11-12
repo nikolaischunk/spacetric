@@ -40,7 +40,7 @@ public class Game extends ApplicationAdapter {
         if (Gdx.input.isTouched()) {
             float sizeWidth = OwnShip.getWidth() / 2;
             int sizeWidthInt = (int) sizeWidth;
-            myShip.setX(Gdx.graphics.getHeight() - Gdx.input.getY() - sizeWidthInt);
+            myShip.setX(Gdx.graphics.getWidth() - Gdx.input.getX() - sizeWidthInt);
             //lasers.add(myShip.shoot(myShip.getLeftLaser().getLaser(), batch));
             lasers.add(myShip.shoot());
         }
