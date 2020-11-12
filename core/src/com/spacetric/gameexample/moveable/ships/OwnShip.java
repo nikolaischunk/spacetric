@@ -9,7 +9,7 @@ import java.util.Optional;
 public class OwnShip extends SpaceElement {
 
     private final Laser laser;
-    private int i = 14;
+    private int i = 11;
     private static final int width = 150;
     private static final int height = 150;
 
@@ -28,7 +28,7 @@ public class OwnShip extends SpaceElement {
 
     public Optional<Laser> shoot() {
         i++;
-        if (i == 15) {
+        if (i == 12) {
             i = 0;
             return Optional.of(new Laser(laser.getLaserTexture(), x, y + height - 10));
         }
