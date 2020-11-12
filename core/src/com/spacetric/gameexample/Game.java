@@ -33,7 +33,7 @@ public class Game extends ApplicationAdapter {
         initializeAsteroids();
         opponentShip = new OpponentShip("Ships/opShip1.png", 6, 200, 200, 40, Gdx.graphics.getHeight());
         myShip = new OwnShip("Ships/playerShip.png", 0, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 8, "Shots/Shot1/shot1_4.png");
-        bg = new Background(new Texture("Sky/SkyLong.png"));
+        bg = new Background(new Texture("Sky/SkyShort.png"));
     }
 
     @Override
