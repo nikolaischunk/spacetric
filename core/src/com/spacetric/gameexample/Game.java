@@ -11,6 +11,7 @@ import com.spacetric.gameexample.moveable.ships.OpponentShip;
 import com.spacetric.gameexample.moveable.ships.OwnShip;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Game extends ApplicationAdapter {
@@ -38,12 +39,16 @@ public class Game extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if (Gdx.input.isTouched()) {
-            float sizeWidth = OwnShip.getWidth() / 2;
-            int sizeWidthInt = (int) sizeWidth;
+            float sizeWidth = OwnShip.getWidth() / 2; //Calculates the Middle of the Ship
+            //float sizeHeight = OwnShip.getHeight() / 2;
+            int sizeWidthInt = (int) sizeWidth; // Cast to Int
+            //int sizeHeightInt = (int) sizeHeight;
             myShip.setX(Gdx.graphics.getWidth() - Gdx.input.getX() - sizeWidthInt);
-            //lasers.add(myShip.shoot(myShip.getLeftLaser().getLaser(), batch));
+            //
+
             lasers.add(myShip.shoot());
         }
+
         batch.begin();
         for(Laser l : lasers) {
             l.move(batch);
