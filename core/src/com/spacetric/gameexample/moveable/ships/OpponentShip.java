@@ -30,6 +30,8 @@ public class OpponentShip extends SpaceElement {
         y -= speed;
         super.move(batch);
         if (y < -image.getHeight()) {
+            // TODO Change to losing screen
+            System.exit(-1);
             Gdx.app.log("LOST", "You lost the game");
         }
     }
