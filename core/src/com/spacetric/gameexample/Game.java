@@ -95,24 +95,21 @@ public class Game extends ApplicationAdapter {
 
     private void initializeAsteroids() {
         asteroids = new ArrayList<>();
-        asteroids.add(new SpaceObject("Astroids/Astroid1_1.png"));
-        asteroids.add(new SpaceObject("Astroids/Astroid1_2.png"));
-        asteroids.add(new SpaceObject("Astroids/Astroid1_3.png"));
-        asteroids.add(new SpaceObject("Astroids/Astroid1_4.png"));
-        asteroids.add(new SpaceObject("Astroids/Astroid1_5.png"));
+        for(int i = 1; i < 6; i++) {
+            asteroids.add(new SpaceObject("Astroids/Astroid1_" + i + ".png"));
+        }
         Gdx.app.log("INITIALIZER", "ASTEROIDS: " + asteroids.size() + "");
 
     }
 
     private void initializeEnemies() {
         enemies = new ArrayList<>();
-        enemies.add(new OpponentShip("Ships/opShip1.png"));
-        enemies.add(new OpponentShip("Ships/opShip1.png"));
-        enemies.add(new OpponentShip("Ships/opShip1.png"));
-        enemies.add(new OpponentShip("Ships/opShip1.png"));
-        enemies.add(new OpponentShip("Ships/opShip1.png"));
+        for(int i = 1; i < 6; i++) {
+            enemies.add(new OpponentShip("Ships/opShip1.png"));
+        }
         Gdx.app.log("INITIALIZER", "OPS: " + asteroids.size() + "");
     }
+
 
     private void moveToTouchPosition() {
         if (Gdx.input.isTouched()) {

@@ -22,10 +22,7 @@ public class Background extends Rectangle {
         this.sky2 = sky2;
         this.ysky = 0;
         this.ysky2 = sky.getHeight();
-
         this.speed = 250;
-
-
         this.secondBackgroundY = Gdx.graphics.getHeight();
 
     }
@@ -48,7 +45,7 @@ public class Background extends Rectangle {
         if (topBg2 < 0) {
             ysky2 = Gdx.graphics.getHeight();
         }
-
+        //Draws a new Sky, once the old sky is smaller then the screen
         batch.draw(sky, x, ysky, width, height);
         batch.draw(sky, x, ysky2, width, height);
     }
