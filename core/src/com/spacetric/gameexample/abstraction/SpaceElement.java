@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 
+import java.util.Objects;
+
 
 public abstract class SpaceElement extends Rectangle {
 
     protected int speed;
-    protected Texture image;
+    protected transient Texture image;
 
     protected SpaceElement(int speed, String pathToFile, int width, int height, int x, int y) {
         this.speed = speed;
@@ -69,4 +71,19 @@ public abstract class SpaceElement extends Rectangle {
     }
 
     public abstract void dispose();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        SpaceElement that = (SpaceElement) o;
+        return speed == that.speed &&
+                image.equals(that.image);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), speed, image);
+    }
 }

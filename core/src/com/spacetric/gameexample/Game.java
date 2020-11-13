@@ -12,7 +12,6 @@ import com.spacetric.gameexample.moveable.ships.OpponentShip;
 import com.spacetric.gameexample.moveable.ships.OwnShip;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;

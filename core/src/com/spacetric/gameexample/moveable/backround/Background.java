@@ -5,14 +5,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
 
+import java.util.Objects;
+
 public class Background extends Rectangle {
 
-    Texture sky1;
-    Texture sky2;
-    float yCoordinateSky1;
-    float yCoordinateSky2;
-    float secondBackgroundY;
-    float speed;
+    private transient Texture sky1;
+    private transient Texture sky2;
+    private float yCoordinateSky1;
+    private float yCoordinateSky2;
+    private float speed;
 
     /**
      * Constructs a new rectangle with all values set to zero
@@ -23,7 +24,6 @@ public class Background extends Rectangle {
         this.yCoordinateSky1 = 0;
         this.yCoordinateSky2 = sky1.getHeight();
         this.speed = 250;
-        this.secondBackgroundY = Gdx.graphics.getHeight();
     }
 
     public void render(Batch batch) {
@@ -56,4 +56,21 @@ public class Background extends Rectangle {
         return sky2;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Background that = (Background) o;
+        return Float.compare(that.yCoordinateSky1, yCoordinateSky1) == 0 &&
+                Float.compare(that.yCoordinateSky2, yCoordinateSky2) == 0 &&
+                Float.compare(that.speed, speed) == 0 &&
+                Objects.equals(sky1, that.sky1) &&
+                Objects.equals(sky2, that.sky2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), sky1, sky2, yCoordinateSky1, yCoordinateSky2, speed);
+    }
 }
