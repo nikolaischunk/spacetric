@@ -14,8 +14,10 @@ public class Laser extends SpaceElement {
 
     public Laser(Texture laserTexture, float x, float y) {
         super();
-        this.image = laserTexture;
+        this.image = createImage("Shots/Shot1/shot1_4.png",150,75);
         speed = 10;
+        this.width = 150;
+        this.height = 75;
         this.x = x;
         this.y = y;
     }
@@ -42,11 +44,6 @@ public class Laser extends SpaceElement {
         batch.draw(image, x, y);
     }
 
-
-    public Texture getLaserTexture() {
-        return image;
-    }
-
     public void setLaser(Texture laser) {
         this.image = laser;
     }
@@ -57,5 +54,10 @@ public class Laser extends SpaceElement {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    @Override
+    public void dispose() {
+        image.dispose();
     }
 }

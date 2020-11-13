@@ -53,4 +53,12 @@ public class Background extends Rectangle {
         batch.draw(sky, x, ysky2, width, height);
     }
 
+    public Texture getSky() {
+        return sky;
+    }
+
+    public Texture getSky2() {
+        return sky2;
+    }
+
 }

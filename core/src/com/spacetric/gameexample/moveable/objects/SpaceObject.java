@@ -29,4 +29,9 @@ public class SpaceObject extends SpaceElement {
             Gdx.app.log("METEOR_LOG", x + " " + y);
         }
     }
+
+    @Override
+    public void dispose() {
+        image.dispose();
+    }
 }

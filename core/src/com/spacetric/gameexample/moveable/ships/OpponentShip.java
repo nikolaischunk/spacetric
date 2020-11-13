@@ -9,16 +9,11 @@ import java.util.Random;
 
 public class OpponentShip extends SpaceElement {
 
-    private Texture t;
     private static final int minWidth = 70;
     private static final int maxWidth = 150;
     private static final int minSpeed = 2;
     private static final int maxSpeed = 5;
     private static final Random intRand = new Random();
-
-    public OpponentShip(String pathToFile, int speed, int width, int height, int x, int y) {
-        super(speed, pathToFile, width, height, x, y);
-    }
 
     public OpponentShip(String pathToFile) {
         super(
@@ -37,6 +32,11 @@ public class OpponentShip extends SpaceElement {
         if (y < -image.getHeight()) {
             Gdx.app.log("LOST", "You lost the game");
         }
+    }
+
+    @Override
+    public void dispose() {
+        image.dispose();
     }
 
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.spacetric.gameexample.abstraction.SpaceElement;
 import com.spacetric.gameexample.moveable.backround.Background;
 import com.spacetric.gameexample.moveable.objects.Laser;
 import com.spacetric.gameexample.moveable.objects.SpaceObject;
@@ -12,16 +13,15 @@ import com.spacetric.gameexample.moveable.ships.OwnShip;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 public class Game extends ApplicationAdapter {
-    private final List<Laser> lasers = new ArrayList<>();
+    private List<Laser> lasers = new ArrayList<>();
     SpriteBatch batch;
-    Texture img;
     List<SpaceObject> asteroids;
     List<OpponentShip> enemies;
-    OpponentShip opponentShip;
     OwnShip myShip;
     Background bg;
 
@@ -30,57 +30,88 @@ public class Game extends ApplicationAdapter {
         batch = new SpriteBatch();
         initializeAsteroids();
         initializeEnemies();
-        opponentShip = new OpponentShip("Ships/opShip1.png", 6, 200, 200, 40, Gdx.graphics.getHeight());
-        myShip = new OwnShip("Ships/playerShip.png", 0, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 8, "Shots/Shot1/shot1_4.png");
+        myShip = new OwnShip("Ships/playerShip.png", 0, Gdx.graphics.getWidth() / 2 + 75, Gdx.graphics.getHeight() / 8, "Shots/Shot1/shot1_4.png");
         bg = new Background(new Texture("Sky/SkyLong.png"), new Texture("Sky/SkyShort.png"));
-    }
-
-    private void initializeEnemies() {
-        enemies = Arrays.asList(
-                new OpponentShip("Ships/opShip1.png"),
-                new OpponentShip("Ships/opShip1.png"),
-                new OpponentShip("Ships/opShip1.png"),
-                new OpponentShip("Ships/opShip1.png"),
-                new OpponentShip("Ships/opShip1.png")
-        );
     }
 
     @Override
     public void render() {
-
         moveToTouchPosition();
-
         batch.begin();
         bg.render(batch);
-        for (Laser l : lasers) {
-            l.move(batch);
+        checkCollisionLaserAndEnemy();
+        checkCollisionWithAsteroids();
+        for (Iterator<Laser> iterator = lasers.iterator(); iterator.hasNext(); ) {
+            Laser l = iterator.next();
+            if (l.getX() > Gdx.graphics.getWidth()) {
+                l.getTexture().dispose();
+                iterator.remove();
+            } else {
+                l.move(batch);
+            }
         }
         for (SpaceObject asteroid : asteroids) {
             asteroid.move(batch);
         }
-        for(OpponentShip ops : enemies) {
+        for (OpponentShip ops : enemies) {
             ops.move(batch);
         }
         myShip.move(batch);
-        opponentShip.move(batch);
         batch.end();
     }
 
-    @Override
-    public void dispose() {
-        batch.dispose();
-        img.dispose();
+    private void checkCollisionLaserAndEnemy() {
+        for (Iterator<Laser> laserIterator = lasers.iterator(); laserIterator.hasNext();) {
+            Laser l = laserIterator.next();
+            for (Iterator<OpponentShip> opsIterator = enemies.iterator(); opsIterator.hasNext();) {
+                OpponentShip ops = opsIterator.next();
+                if (ops.overlaps(l)) {
+                    ops.dispose();
+                    opsIterator.remove();
+                    l.dispose();
+                    laserIterator.remove();
+                    // Spawn new OPS
+                    createNewEnemy();
+                    // break because laser can only destroy 1 ship
+                    break;
+                }
+            }
+
+        }
     }
 
+    private void checkCollisionWithAsteroids() {
+        for (SpaceElement asteroid : asteroids) {
+            if(asteroid.overlaps(myShip)) {
+                Gdx.app.log("GAME_INFO", "You hit an asteroid and lost the game.");
+                System.exit(-1);
+            }
+        }
+    }
+
+    private void createNewEnemy() {
+        enemies.add(new OpponentShip("Ships/opShip1.png"));
+    }
 
     private void initializeAsteroids() {
-        asteroids = Arrays.asList(
-                new SpaceObject("Astroids/Astroid1_1.png"),
-                new SpaceObject("Astroids/Astroid1_2.png"),
-                new SpaceObject("Astroids/Astroid1_3.png"),
-                new SpaceObject("Astroids/Astroid1_4.png"),
-                new SpaceObject("Astroids/Astroid1_5.png")
-        );
+        asteroids = new ArrayList<>();
+        asteroids.add(new SpaceObject("Astroids/Astroid1_1.png"));
+        asteroids.add(new SpaceObject("Astroids/Astroid1_2.png"));
+        asteroids.add(new SpaceObject("Astroids/Astroid1_3.png"));
+        asteroids.add(new SpaceObject("Astroids/Astroid1_4.png"));
+        asteroids.add(new SpaceObject("Astroids/Astroid1_5.png"));
+        Gdx.app.log("INITIALIZER", "ASTEROIDS: " + asteroids.size() + "");
+
+    }
+
+    private void initializeEnemies() {
+        enemies = new ArrayList<>();
+        enemies.add(new OpponentShip("Ships/opShip1.png"));
+        enemies.add(new OpponentShip("Ships/opShip1.png"));
+        enemies.add(new OpponentShip("Ships/opShip1.png"));
+        enemies.add(new OpponentShip("Ships/opShip1.png"));
+        enemies.add(new OpponentShip("Ships/opShip1.png"));
+        Gdx.app.log("INITIALIZER", "OPS: " + asteroids.size() + "");
     }
 
     private void moveToTouchPosition() {
@@ -94,4 +125,14 @@ public class Game extends ApplicationAdapter {
             }
         }
     }
+
+    @Override
+    public void dispose() {
+        myShip.getTexture().dispose();
+        myShip.getLaser().getTexture().dispose();
+        bg.getSky().dispose();
+        bg.getSky2().dispose();
+        batch.dispose();
+    }
+
 }
