@@ -26,6 +26,8 @@ public abstract class SpaceElement extends Rectangle {
     protected SpaceElement(int speed, String pathToFile, int widthAndHeight, int x, int y) {
         this.speed = speed;
         this.image = createImage(pathToFile, widthAndHeight, widthAndHeight);
+        setWidth(widthAndHeight);
+        setHeight(widthAndHeight);
         this.x = x;
         this.y = y;
     }
@@ -86,4 +88,13 @@ public abstract class SpaceElement extends Rectangle {
     public int hashCode() {
         return Objects.hash(super.hashCode(), speed, image);
     }
+
+    public boolean overlapsAsteroid(Rectangle r) {
+        return x < r.x + r.width*0.9 && x + width*0.9 > r.x && y < r.y + r.height*0.9 && y + height*0.9 > r.y;
+    }
+
+    public boolean overlapsOpponentShip(Rectangle r) {
+        return x < r.x + r.width*0.7 && x + width*0.7 > r.x && y < r.y + r.height*0.7 && y + height*0.7 > r.y;
+    }
+
 }

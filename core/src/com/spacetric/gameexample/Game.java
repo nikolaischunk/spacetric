@@ -35,11 +35,12 @@ public class Game extends ApplicationAdapter {
 
     @Override
     public void render() {
-        moveToTouchPosition();
+        moveShipToTouchPosition();
         batch.begin();
         bg.render(batch);
         checkCollisionLaserAndEnemy();
         checkCollisionWithAsteroids();
+        checkCollisionWithOpponentShips();
         for (Iterator<Laser> iterator = lasers.iterator(); iterator.hasNext(); ) {
             Laser l = iterator.next();
             if (l.getX() > Gdx.graphics.getWidth()) {
@@ -81,8 +82,17 @@ public class Game extends ApplicationAdapter {
 
     private void checkCollisionWithAsteroids() {
         for (SpaceElement asteroid : asteroids) {
-            if(asteroid.overlaps(myShip)) {
+            if(myShip.overlapsAsteroid(asteroid)) {
                 Gdx.app.log("GAME_INFO", "You hit an asteroid and lost the game.");
+                System.exit(-1);
+            }
+        }
+    }
+
+    private void checkCollisionWithOpponentShips() {
+        for (OpponentShip ops : enemies) {
+            if(ops.overlapsOpponentShip(myShip)) {
+                Gdx.app.log("GAME_INFO", "You hit an enemy and lost the game.");
                 System.exit(-1);
             }
         }
@@ -110,7 +120,7 @@ public class Game extends ApplicationAdapter {
     }
 
 
-    private void moveToTouchPosition() {
+    private void moveShipToTouchPosition() {
         if (Gdx.input.isTouched()) {
             float sizeWidth = myShip.getWidth() / 2; //Calculates the Middle of the Ship
             int sizeWidthInt = (int) sizeWidth; // Cast to Int
