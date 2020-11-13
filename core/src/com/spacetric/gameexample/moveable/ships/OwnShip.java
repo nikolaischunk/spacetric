@@ -17,6 +17,7 @@ public class OwnShip extends SpaceElement {
     public OwnShip(String pathToFile, int speed, int x, int y, String pathToLaserImg) {
         super(speed, pathToFile, width, height, x, y);
         laser = new Laser(pathToLaserImg, x + (width), y);
+        // Set width and height from rectangle
         setWidth(width);
         setHeight(height);
     }
@@ -28,9 +29,10 @@ public class OwnShip extends SpaceElement {
 
     public Optional<Laser> shoot() {
         laserIterationDelay++;
+        // creates delay of shoots so they are not too fast
         if (laserIterationDelay == 10) {
             laserIterationDelay = 0;
-            return Optional.of(new Laser(laser.getTexture(), x, y + height - 10));
+            return Optional.of(new Laser(x, y + height - 10));
         }
         return Optional.empty();
     }

@@ -8,35 +8,21 @@ import com.spacetric.gameexample.abstraction.SpaceElement;
 
 public class Laser extends SpaceElement {
 
+    private static final int width = 150;
+    private static final int height = 75;
+
     public Laser(String pathToLaser, int x, int y) {
         super(10, pathToLaser, 150, 75, x, y);
     }
 
-    public Laser(Texture laserTexture, float x, float y) {
+    public Laser(float x, float y) {
         super();
-        this.image = createImage("Shots/Shot1/shot1_4.png",150,75);
+        this.image = createImage("Shots/Shot1/shot1_4.png",width,height);
         speed = 10;
-        this.width = 150;
-        this.height = 75;
+        super.width = width;
+        super.height = height;
         this.x = x;
         this.y = y;
-    }
-
-    protected Texture createImage(String pathToFile, int width, int height) {
-        Texture img;
-        Pixmap pixMap200 = new Pixmap(Gdx.files.internal(pathToFile));
-        Pixmap pixMap100 = new Pixmap(width, height, pixMap200.getFormat());
-
-        pixMap100.drawPixmap(pixMap200,
-                0, 0, pixMap200.getWidth(), pixMap200.getHeight(),
-                0, 0, pixMap100.getWidth(), pixMap100.getHeight()
-        );
-
-        img = new Texture(pixMap100);
-        pixMap200.dispose();
-        pixMap100.dispose();
-
-        return img;
     }
 
     public void move(Batch batch) {

@@ -7,51 +7,49 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Background extends Rectangle {
 
-    Texture sky;
+    Texture sky1;
     Texture sky2;
-    float ysky;
-    float ysky2;
+    float yCoordinateSky1;
+    float yCoordinateSky2;
     float secondBackgroundY;
     float speed;
 
     /**
      * Constructs a new rectangle with all values set to zero
      */
-    public Background(Texture sky, Texture sky2) {
-        this.sky = sky;
+    public Background(Texture sky1, Texture sky2) {
+        this.sky1 = sky1;
         this.sky2 = sky2;
-        this.ysky = 0;
-        this.ysky2 = sky.getHeight();
+        this.yCoordinateSky1 = 0;
+        this.yCoordinateSky2 = sky1.getHeight();
         this.speed = 250;
         this.secondBackgroundY = Gdx.graphics.getHeight();
-
     }
 
     public void render(Batch batch) {
-
-        ysky = ysky - (speed * Gdx.graphics.getDeltaTime());
-        ysky2 = ysky2 - (speed * Gdx.graphics.getDeltaTime());
+        yCoordinateSky1 = yCoordinateSky1 - (speed * Gdx.graphics.getDeltaTime());
+        yCoordinateSky2 = yCoordinateSky2 - (speed * Gdx.graphics.getDeltaTime());
 
         float width = Gdx.graphics.getWidth();
-        float height = (width / sky.getWidth()) * sky.getHeight();
+        float height = (width / sky1.getWidth()) * sky1.getHeight();
+        float topBg1 = yCoordinateSky1 + height;
+        float topBg2 = yCoordinateSky2 + height;
 
-        float topBg1 = ysky + height;
-        float topBg2 = ysky2 + height;
-        //Wenn erster BG aus dem Bild, position x wieder auf höhe screen setzten.
-
+        //if sky1 leaves screen, reset position y back to height of screen
         if (topBg1 < 0) {
-            ysky = Gdx.graphics.getHeight();
+            yCoordinateSky1 = Gdx.graphics.getHeight();
         }
+        //if sky2 leaves screen, reset position y back to height of screen
         if (topBg2 < 0) {
-            ysky2 = Gdx.graphics.getHeight();
+            yCoordinateSky2 = Gdx.graphics.getHeight();
         }
-        //Draws a new Sky, once the old sky is smaller then the screen
-        batch.draw(sky, x, ysky, width, height);
-        batch.draw(sky, x, ysky2, width, height);
+
+        batch.draw(sky1, x, yCoordinateSky1, width, height);
+        batch.draw(sky1, x, yCoordinateSky2, width, height);
     }
 
     public Texture getSky() {
-        return sky;
+        return sky1;
     }
 
     public Texture getSky2() {
